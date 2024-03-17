@@ -12,6 +12,20 @@
 - Legends of Idleon game
 - File archiver tool
 
+## What this is and isn't
+
+**It is not**
+
+- A game hack or a hacking tool
+- Gem generator
+- Botting framework
+
+**It is**
+
+- A tool to help with third-party tool development
+- Automated way to globally expose one of the most important game related object(s) after updates
+- Educational project to aid hobbyists working with `.asar` files and JavaScript-based games 
+
 ## Usage
 
 ### Getting the main idleon script file
