@@ -6,6 +6,10 @@
 - https://www.legendsofidleon.com/
 - https://store.steampowered.com/app/1476970/IdleOn__The_Idle_MMO/
 
+## About
+
+This is a small tool which automatically patches the `N.js` file within the `app.asar` archive, and by doing so, globally exposes the main game object and all if its child objects so that they can be accessed with e.g. DevTools. After patching the `N.js` file and repackaging it in the `app.asar` file, the main game object is exposed as `exposedGame` global variable within the `index.html (IFrame)` JavaScript context.
+
 ## Requirement(s)
 
 - Node.js installed
