@@ -1,5 +1,8 @@
 # Automatic Game Variable Exposer for Legends of Idleon
 
+![idleonLogo](https://github.com/ahvonenj/idleon-auto-expose/assets/8504168/c43e8590-bb6a-4f27-96e5-9c86ca8552ea)
+
+
 - https://www.legendsofidleon.com/
 - https://store.steampowered.com/app/1476970/IdleOn__The_Idle_MMO/
 
