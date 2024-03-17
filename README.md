@@ -10,6 +10,7 @@
 
 - Node.js installed
 - Legends of Idleon game
+- File archiver tool
 
 ## Usage
 
