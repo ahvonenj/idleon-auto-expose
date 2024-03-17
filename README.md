@@ -1,5 +1,10 @@
 # Automatic Game Variable Exposer for Legends of Idleon
 
+## Requirement(s)
+
+- Node.js installed
+- Legends of Idleon game
+
 ## Usage
 
 ### Getting the main idleon script file
