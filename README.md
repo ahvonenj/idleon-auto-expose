@@ -1,5 +1,8 @@
 # Automatic Game Variable Exposer for Legends of Idleon
 
+- https://www.legendsofidleon.com/
+- https://store.steampowered.com/app/1476970/IdleOn__The_Idle_MMO/
+
 ## Requirement(s)
 
 - Node.js installed
