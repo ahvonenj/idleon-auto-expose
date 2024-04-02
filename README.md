@@ -152,6 +152,10 @@ The `exposedGame["com.stencyl.behavior.Script"]` is what I would describe as sor
 
 Try printing out the contents of `exposedGame["com.stencyl.behavior.Script"].getGameAttribute("PixelHelperActor")` into the console for some very interesting objects that the game itself uses for many things and which might come very handy when fiddling with the game yourself :>
 
+### The game won't close anymore after enabling devtools
+
+This is normal with applications like Idleon. For some reason the devtools prevents closing of the "main process", in this case, the game. Simply close the devtools first and then you should be able to close the game itself.
+
 ## Extra
 
 **Tested to be working with at least these three (latest at the time of writing) updates:**  
