@@ -151,3 +151,10 @@ Inside the main game object (exposed as `exposedGame`), look for the child objec
 The `exposedGame["com.stencyl.behavior.Script"]` is what I would describe as sort of the underlying engine of the game. It contains a great deal of useful methods, one of which in particular is `getGameAttribute`.
 
 Try printing out the contents of `exposedGame["com.stencyl.behavior.Script"].getGameAttribute("PixelHelperActor")` into the console for some very interesting objects that the game itself uses for many things and which might come very handy when fiddling with the game yourself :>
+
+## Extra
+
+**Tested to be working with at least these three (latest at the time of writing) updates:**  
+- Minibosses update - March 31, 2024
+- Tome update - March 16, 2024
+- Quality of Life update - March 9, 2024
