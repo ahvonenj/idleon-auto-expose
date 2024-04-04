@@ -1,9 +1,34 @@
 # Automatic Game Variable Exposer for Legends of Idleon
 
+![idleonLogo](https://github.com/ahvonenj/idleon-auto-expose/assets/8504168/c43e8590-bb6a-4f27-96e5-9c86ca8552ea)
+
+
+- https://www.legendsofidleon.com/
+- https://store.steampowered.com/app/1476970/IdleOn__The_Idle_MMO/
+
+## About
+
+This is a small tool which automatically patches the `N.js` file within the `app.asar` archive, and by doing so, globally exposes the main game object and all if its child objects so that they can be accessed with e.g. DevTools. After patching the `N.js` file and repackaging it in the `app.asar` file, the main game object is exposed as `exposedGame` global variable within the `index.html (IFrame)` JavaScript context.
+
 ## Requirement(s)
 
 - Node.js installed
 - Legends of Idleon game
+- File archiver tool
+
+## What this is and isn't
+
+**It is not**
+
+- A game hack or a hacking tool
+- Gem generator
+- Botting framework
+
+**It is**
+
+- A tool to help with third-party tool development
+- Automated way to globally expose one of the most important game related object(s) after updates
+- Educational project to aid hobbyists working with `.asar` files and JavaScript-based games 
 
 ## Usage
 
@@ -126,3 +151,15 @@ Inside the main game object (exposed as `exposedGame`), look for the child objec
 The `exposedGame["com.stencyl.behavior.Script"]` is what I would describe as sort of the underlying engine of the game. It contains a great deal of useful methods, one of which in particular is `getGameAttribute`.
 
 Try printing out the contents of `exposedGame["com.stencyl.behavior.Script"].getGameAttribute("PixelHelperActor")` into the console for some very interesting objects that the game itself uses for many things and which might come very handy when fiddling with the game yourself :>
+
+### The game won't close anymore after enabling devtools
+
+This is normal with applications like Idleon. For some reason the devtools prevents closing of the "main process", in this case, the game. Simply close the devtools first and then you should be able to close the game itself.
+
+## Extra
+
+**Tested to be working with at least these (latest at the time of writing) updates:**  
+- 3rd birthday update - April 3, 2024
+- Minibosses update - March 31, 2024
+- Tome update - March 16, 2024
+- Quality of Life update - March 9, 2024
