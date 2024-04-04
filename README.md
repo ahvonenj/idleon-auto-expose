@@ -39,11 +39,22 @@ This is a small tool which automatically patches the `N.js` file within the `app
 - Locate `N.js` within the `app.asar` file at `distBuild/static/game/`
 - Drag the `N.js` file out of the archive somewhere
 
-### Patching the script file
+### OPTIONAL: Getting the index.js file for devtools autopatch
+
+- Locate `index.js` within the `app.asar` file at `src/main/`
+- Drag the `index.js` file out of the archive to the same folder where you put the `N.js` file
+
+### METHOD 1: Patching the script file
 
 - Copy and paste `expose_idleon.mjs` file from this repository into the same folder as where you put the `N.js` file in
 - Open a new terminal window inside the folder where the `expose_idleon.mjs` and `N.js` files are now located
 - Type `node expose_idleon.mjs` to the terminal and press enter
+
+### METHOD 2 (if optional step was taken): Patching the N.js script file and the index.js file
+
+- Copy and paste `expose_idleon.mjs` file from this repository into the same folder as where you put the `N.js` and `index.js` files in
+- Open a new terminal window inside the folder where the `expose_idleon.mjs`, `N.js` and `index.js` files are now located
+- Type `node expose_idleon.mjs --devtools` to the terminal and press enter
 
 If everything went well, you should see output like this:
 
@@ -58,6 +69,14 @@ Main variable name: I
 Patching game
 PATCHED, game engine is now exposed as: I.exposedGame=z;
 Writing patched/N.js - drop this into app.asar distBuild/static/game/
+```
+
+In addition, if going with the optional devtools patching route, the script should also output something like this:
+
+```
+--devtools argument given, patching index.js as well
+PATCHED, devtools should now open when the game launches
+Writing patched/index.js - drop this into app.asar src/main/
 ```
 
 There are three main errors related to the patching itself that could happen:
@@ -79,7 +98,18 @@ The process to find the patchable location and the names of the obfuscated varia
 - After running the `expose_idleon.mjs` script, there should now be a new folder called `patched` next to the `N.js` and `expose_idleon.mjs` files
 - There should be another `N.js` file inside the `patched` folder - this is the patched `N.js` file
 - Open the `app.asar` file again with a file archiver tool and navigate to the `distBuild/static/game/` folder within the archive
-- Drag the `N.js` file inside the `patched` folder into the archive, replacing the `N.js` file there
+- Drag the `N.js` file from inside the `patched` folder into the archive, replacing the `N.js` file there
+
+Continue to the "Enabling Devtools" section.
+
+### OPTIONAL: Repackaging the patched N.js file and the patched index.js file into the app.asar archive
+
+- After running the `expose_idleon.mjs --devtools` script, there should now be a new folder called `patched` next to the `N.js`, `index.js` and `expose_idleon.mjs` files
+- There should be another `N.js` file, as well as a `index.js` file inside the `patched` folder - these are the patched `N.js` and `index.js` files
+- Open the `app.asar` file again with a file archiver tool and navigate to the `distBuild/static/game/` folder within the archive
+- Drag the `N.js` file from inside the `patched` folder into the archive, replacing the `N.js` file there
+- navigate to the `src/main/` folder within the archive
+- Drag the `index.js` file from inside the `patched` folder into the archive, replacing the `index.js` file there
 
 Continue to the "Enabling Devtools" section.
 
