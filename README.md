@@ -10,6 +10,8 @@
 
 This is a small tool which automatically patches the `N.js` file within the `app.asar` archive, and by doing so, globally exposes the main game object and all if its child objects so that they can be accessed with e.g. DevTools. After patching the `N.js` file and repackaging it in the `app.asar` file, the main game object is exposed as `exposedGame` global variable within the `index.html (IFrame)` JavaScript context.
 
+As of 4.4.2024 the script now also support optional automatic patching and enabling of the devtools. Follow the optional route in the instructions to do this.
+
 ## Requirement(s)
 
 - Node.js installed
