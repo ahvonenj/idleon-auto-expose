@@ -115,6 +115,8 @@ Continue to the "Enabling Devtools" section.
 
 ## Enabling devtools
 
+This part explain the manual patching and enabling of the devtools. As of 4.4.2024 there is really no point to do it manually, since the script now supports optional automatic patching and enabling if the devtools as well. I recommend following the instructions above and taking the optional devtools patching route instead of patching the devtools manually. 
+
 Now that the game itself is patched and the main game object is exposed, we still need to enable to use of devtools. This needs to be done by hand for now:
 
 - Open the `app.asar` once more and navigate to `src/main/`
@@ -193,3 +195,6 @@ This is normal with applications like Idleon. For some reason the devtools preve
 - Minibosses update - March 31, 2024
 - Tome update - March 16, 2024
 - Quality of Life update - March 9, 2024
+
+**Changelog:**  
+- 4.4.2024 - Added support for optional autopatching and enabling of the devtools (also updated the instructions to reflect this)
