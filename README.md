@@ -158,7 +158,8 @@ This is normal with applications like Idleon. For some reason the devtools preve
 
 ## Extra
 
-**Tested to be working with at least these three (latest at the time of writing) updates:**  
+**Tested to be working with at least these (latest at the time of writing) updates:**  
+- 3rd birthday update - April 3, 2024
 - Minibosses update - March 31, 2024
 - Tome update - March 16, 2024
 - Quality of Life update - March 9, 2024
