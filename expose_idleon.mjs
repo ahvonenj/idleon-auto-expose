@@ -2,18 +2,42 @@ import fs from "fs/promises";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+let patchDevtools = false;
+
+if(process.argv.indexOf('--devtools') > -1) {
+	patchDevtools = true;
+}
+
 const currentDirectory = dirname(fileURLToPath(import.meta.url));
 
 const targetPattern = 'config_game_config_json';
 const subPatternPatchLocation = /(var [a-zA-Z$]+={})/;
 const subPatternEngineVariable = /([a-zA-Z$]+)\["tweenxcore.MatrixTools"\]/;
 const subPatternMainVariable = /function\([a-zA-Z$]+,([a-zA-Z$]+)\){[a-zA-Z$]+\.lime=[a-zA-Z$]+\.lime\|\|\{\}/;
+
+const indexFilePatternA = 'devTools: isDevelopment';
+const indexFilePatternB = /\((isDevelopment)\)/g;
+const indexFileSubPatternB = 'window.webContents.openDevTools()';
+
 const NFileName = 'N.js';
+
+function replaceSubstring(str, cutIndex, replacement, joinIndex) {
+    const first = str.substring(0, cutIndex);
+    const second = str.substring(joinIndex);
+    return first + replacement + second;
+}
 
 (async () => {
 	console.log(`Reading ${NFileName}`);
 
-	const Nfile = await fs.readFile(NFileName, { encoding: "utf-8" });
+	let Nfile = null;
+
+	try {
+		Nfile = await fs.readFile(NFileName, { encoding: "utf-8" });
+	} catch(err) {
+		console.log(`${NFileName} not found, make sure to extract it from the app.asar to this directory first`);
+		process.exit(0);
+	}
 
 	console.log(`Seeking patchable patterns`);
 	
@@ -65,4 +89,48 @@ const NFileName = 'N.js';
 		await fs.mkdir('patched');
 
 	await fs.writeFile(`patched/${NFileName}`, NfilePatched);
+
+	if(patchDevtools) {
+		console.log('--devtools argument given, patching index.js as well');
+
+		let indexFile = null;
+
+		try {
+			indexFile = await fs.readFile('index.js', { encoding: "utf-8" });
+		} catch(err) {
+			console.log('index.js not found, make sure to extract it from the app.asar to this directory first');
+			process.exit(0);
+		}
+
+		if(indexFile.indexOf(indexFilePatternA) === -1) {
+			console.log(`Could not find primary pattern for index.js - patching index.js FAILED`);
+			process.exit(0);
+		}
+
+		indexFile = indexFile.replace(indexFilePatternA, `devTools: true`);
+
+		let indexPatternBIndex = null;
+		let match;
+
+		while (match = indexFilePatternB.exec(indexFile)) {
+			const idx = match.index;
+			const indexLocale = indexFile.substring(idx, idx + 65);
+			
+			if(indexLocale.indexOf(indexFileSubPatternB) > -1) {
+				indexPatternBIndex = idx;
+			}
+		}
+
+		if(indexPatternBIndex === null) {
+			console.log(`Could not find secondary pattern for index.js - patching index.js FAILED`);
+			process.exit(0);
+		}
+
+		indexFile = replaceSubstring(indexFile, indexPatternBIndex + 1, 'true', indexPatternBIndex + 'isDevelopment'.length + 1);
+
+		console.log('PATCHED, devtools should now open when the game launches');
+		console.log(`Writing patched/index.js - drop this into app.asar src/main/`);
+
+		await fs.writeFile(`patched/index.js`, indexFile);
+	}
 })();
